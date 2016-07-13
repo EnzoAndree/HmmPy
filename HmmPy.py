@@ -143,6 +143,8 @@ if __name__ == "__main__":
     parser.add_argument("-u", "--unique", dest="unique", action="store_true",
                         help="show only the Best Bitscore domain for each \
                         query on hmmscan program output", default=False)
+    parser.add_argument("-s", "--spacer", dest="spacer", help="Select the \
+                        spacer for the program output", default="\t")
     parser.add_argument("-o", "--outfile", nargs="?", help="(default: stdout)",
                         type=argparse.FileType("w"), default=sys.stdout)
     parser.add_argument("-v", "--version", action="version", version="%(prog)s v{} ({}) By: {}".format(__version__, __date__, __author__))
@@ -155,7 +157,7 @@ if __name__ == "__main__":
     cov = args.cov
     outfile = args.outfile
     domtblout = args.domtblout
-
+    spacer = args.spacer
     hmm = HMMparser(domtblout)
 
     if args.bits:
@@ -167,6 +169,17 @@ if __name__ == "__main__":
     if args.unique:
         hmm.uniqueByBestBitscore()
 
+    if hmm.parameters["Program"] == "hmmscan":
+        header = ["target name", "accession", "tlen", "query name",
+                  "accession", "qlen", "E-value", "score", "bias", "#", "of",
+                  "c-Evalue", "i-Evalue", "score", "bias", "from", "to",
+                  "from", "to", "from", "to", "acc", "description of target"]
+    else:
+        header = ["target name", "accession", "query name", "accession",
+                  "E-value", "score", "bias", "E-value", "score", "bias",
+                  "exp", "reg", "clu", "ov", "env", "dom", "rep", "inc",
+                  "description of target"]
+    print(spacer.join(header), file=outfile)
     for row in hmm.matrix:
-        row = "|".join(row)
+        row = spacer.join(row)
         print(row, file=outfile)
