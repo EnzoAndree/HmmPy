@@ -15,7 +15,7 @@ HmmPy can run directly without filter:
 
 Or with any combination of filters:
 
-	python3 HmmPy.py -e 1e-5 -c 0.4 -u MAPZ01.out.dm
+	python3 HmmPy.py -e 1e-5 -c 0.4 -u MAPZ01.out
 
 Additionally you can use the python class in your code.
 
