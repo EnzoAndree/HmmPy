@@ -1,3 +1,7 @@
+# It is better not to use HmmPy, Try 🐍🟡♦️🟦 PyHMMER
+🐍🟡♦️🟦 PyHMMER Cython bindings and Python interface to HMMER3.
+https://github.com/althonos/pyhmmer
+
 # HmmPy
 HmmPy is a Pure-Python parser of --domtblout output of HMMER3 tested in its current version HMMER 3.1b2.
 
